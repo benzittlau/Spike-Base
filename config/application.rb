@@ -38,5 +38,11 @@ module Spike
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    # Configure the generators to use what I want them to use
+    config.generators |g| do
+      g.stylesheets false
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl
   end
 end

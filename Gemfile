@@ -1,12 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.4'
+gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development do
+	gem 'rspec-rails'
+	#Trying to use the rails 3 generators instead
+	#gem 'nifty-generators'
+	gem 'autotest', '4.4.6'
+	gem 'autotest-rails-pure', '4.1.2'
+	gem 'autotest-fsevent', '0.2.4'
+	gem 'autotest-growl', '0.2.9'
+end
 
-gem 'sqlite3'
-
+group :test do
+	gem 'factory_girl'
+	gem 'rspec'
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 
