@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.4'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+gem 'haml-rails'
+gem 'jquery-rails', '>= 0.2.6'
 
 group :development do
 	gem 'rspec-rails'
@@ -15,6 +17,7 @@ end
 
 group :test do
 	gem 'factory_girl'
+	gem 'factory_girl_rails'
 	gem 'rspec'
 end
 # Use unicorn as the web server

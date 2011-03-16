@@ -42,7 +42,9 @@ module Spike
     # Configure the generators to use what I want them to use
     config.generators |g| do
       g.stylesheets false
-      g.test_framework :rspec
+      g.test_framework :rspec, :fixture => true, :views => false, :helpers => false
+      g.template_engine :haml
       g.fixture_replacement :factory_girl
+    end
   end
 end
