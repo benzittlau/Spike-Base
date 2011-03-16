@@ -31,7 +31,7 @@ module Spike
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    config.action_view.javascript_expansions[:defaults] = %w()
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -40,11 +40,9 @@ module Spike
     config.filter_parameters += [:password]
     
     # Configure the generators to use what I want them to use
-    config.generators do |g|
+    config.generators |g| do
       g.stylesheets false
       g.test_framework :rspec
-      g.template_engine :haml
       g.fixture_replacement :factory_girl
-    end
   end
 end
