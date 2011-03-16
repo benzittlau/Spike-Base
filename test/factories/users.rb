@@ -7,3 +7,7 @@ Factory.define :user do |f|
   f.city "Edmonton"
   f.phone_number "780 123 4567"
 end
+
+Factory.sequence :email do |n|
+  "user_#{n}_email@example.com"
+end
