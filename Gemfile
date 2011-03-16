@@ -5,6 +5,8 @@ gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 gem 'haml-rails'
 gem 'jquery-rails', '>= 0.2.6'
 
+gem 'rails3-generators'
+
 group :development do
 	gem 'rspec-rails'
 	#Trying to use the rails 3 generators instead
