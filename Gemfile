@@ -16,6 +16,7 @@ end
 
 group :test do
 	gem 'factory_girl'
+	gem 'factory_girl_rails'
 	gem 'rspec'
 end
 # Use unicorn as the web server
