@@ -2,11 +2,12 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.4'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+gem 'haml'
+gem 'jquery-rails', '>= 0.2.6'
 
 group :development do
 	gem 'rspec-rails'
-	#Trying to use the rails 3 generators instead
-	#gem 'nifty-generators'
+	gem 'nifty-generators'
 	gem 'autotest', '4.4.6'
 	gem 'autotest-rails-pure', '4.1.2'
 	gem 'autotest-fsevent', '0.2.4'
@@ -39,3 +40,4 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem "mocha", :group => :test
