@@ -43,8 +43,6 @@ module Spike
     config.generators do |g|
       g.stylesheets false
       g.test_framework :rspec, :fixture => true
-      g.view_specs false
-      g.helper_specs false
       g.template_engine :haml
       g.fixture_replacement :factory_girl
     end
