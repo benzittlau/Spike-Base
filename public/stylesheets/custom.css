@@ -1,0 +1,13 @@
+.container {
+  width: 780px;
+}
+
+body {
+  background: #bbb;
+}
+
+section {
+  margin-top: 1em;
+  padding: 20px;
+  background: #fff;
+}
