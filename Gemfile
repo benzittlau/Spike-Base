@@ -4,6 +4,7 @@ gem 'rails', '3.0.4'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 gem 'haml-rails'
 gem 'jquery-rails', '>= 0.2.6'
+gem 'paper_trail', '~> 2'
 
 gem 'rails3-generators'
 

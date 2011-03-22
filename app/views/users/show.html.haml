@@ -1,21 +1,38 @@
-%p#notice= notice
-
 %p
-  %b Name:
-  = @user.name
+	%b Name:
+	= @user.name
 %p
-  %b Email:
-  = @user.email
+	%b Email:
+	= @user.email
+%pe
+	%b Address:
+	= @user.address
 %p
-  %b Address:
-  = @user.address
+	%b City:
+	= @user.city
 %p
-  %b City:
-  = @user.city
-%p
-  %b Phone number:
-  = @user.phone_number
+	%b Phone number:
+	= @user.phone_number
 
 = link_to 'Edit', edit_user_path(@user)
 \|
 = link_to 'Back', users_path
+
+- if @user.has_history?
+	%br/
+	%table
+		%tr User History
+		%tr
+			%td Modified At:
+			%td User
+			%td Action
+			%td View Version
+		- @user.versions.reverse.each do |version|
+			%tr
+				%td 
+					= version.created_at.to_s(:history_table)
+				%td 
+					= version.whodunnit
+				%td 
+					= version.event
+				%td Test
