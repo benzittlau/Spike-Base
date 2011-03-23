@@ -1,4 +1,6 @@
 Spike::Application.routes.draw do
+  resources :widgets
+
   #this must come first or it will match for the resource show path
   match 'users/:id/audit/:version' => 'users#audit', :as => :user_audit
   match 'users/:id/revert/:version' => 'user_versions#revert', :as => :user_revert

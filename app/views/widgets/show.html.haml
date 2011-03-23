@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Colour:
+  = @widget.colour
+%p
+  %b Shape:
+  = @widget.shape
+%p
+  %b Size:
+  = @widget.size
+
+= link_to 'Edit', edit_widget_path(@widget)
+\|
+= link_to 'Back', widgets_path
