@@ -57,6 +57,9 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    
+    #set the versioning responsibility
+    params[:user].merge!({:updated_by => "Bob Smith"})
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
