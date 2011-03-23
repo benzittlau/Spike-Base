@@ -37,4 +37,4 @@
 				%td
 					= version.modifications
 				%td
-					= link_to "View", :controller => :users, :action => :show , :id => @user.id, :version => version.number 
+					= link_to "View", user_audit_path(:id => @user.id, :version => version.number )

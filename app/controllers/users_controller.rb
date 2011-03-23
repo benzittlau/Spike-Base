@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     unless params[:version] == nil
       @user.revert_to(params[:version].to_i)
       unless @user.version == User.find(@user.id).version
-        flash.now[:notice] = "You are viewing an old version of this object"
+        revert_link = view_context.link_to("Revert to this version", user_revert_path(@user, :version => params[:version]))
+        flash.now[:notice] = "You are viewing an old version of this object. #{revert_link}".html_safe
       end
     end
     
@@ -69,7 +70,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     #set the versioning responsibility
-    params[:user].merge!({:updated_by => "Bob Smith"})
+    params[:user].merge!({:updated_by => current_user})
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
