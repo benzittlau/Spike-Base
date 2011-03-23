@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    
+    @user.revert_to(params[:version].to_i) unless params[:version] == nil
 
     respond_to do |format|
       format.html # show.html.erb
