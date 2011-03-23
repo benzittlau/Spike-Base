@@ -14,8 +14,16 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    unless params[:version] == nil
+      @user.revert_to(params[:version].to_i)
+      unless @user.version == User.find(@user.id).version
+        flash.now[:notice] = "You are viewing an old version of this object"
+      end
+    end
     
-    @user.revert_to(params[:version].to_i) unless params[:version] == nil
+    if @user.has_history?
+      @versions = @user.versions.reverse
+    end
 
     respond_to do |format|
       format.html # show.html.erb

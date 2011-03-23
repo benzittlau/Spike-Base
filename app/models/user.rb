@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  versioned
+  versioned :class_name => "UserVersion"
   
   def has_history?
     self.versions != nil
