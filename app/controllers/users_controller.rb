@@ -14,13 +14,6 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    unless params[:version] == nil
-      @user.revert_to(params[:version].to_i)
-      unless @user.version == User.find(@user.id).version
-        revert_link = view_context.link_to("Revert to this version", user_revert_path(@user, :version => params[:version]))
-        flash.now[:notice] = "You are viewing an old version of this object. #{revert_link}".html_safe
-      end
-    end
     
     if @user.has_history?
       @versions = @user.versions.reverse
@@ -30,6 +23,23 @@ class UsersController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @user }
     end
+  end
+  
+  def audit
+    @user = User.find(params[:id])
+    
+    if @user.has_history?
+      @versions = @user.versions.reverse
+    end
+    
+    @user.revert_to(params[:version].to_i)
+    
+    unless @user.reverted?
+      redirect_to @user
+    end
+    
+    revert_link = view_context.link_to("Revert to this version", user_revert_path(@user, :version => params[:version]))
+    flash.now[:notice] = "You are viewing an old version of this object. #{revert_link}".html_safe
   end
 
   # GET /users/new

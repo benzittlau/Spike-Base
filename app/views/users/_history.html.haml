@@ -1,0 +1,32 @@
+-if @versions
+	%br/
+	%table
+		%tr
+			User History
+		%tr
+			%td Date
+			%td User
+			%td Action
+			%td Version
+			%td View
+		- @versions.each do |version|
+			%tr
+				%td 
+					= l version.created_at, :format => :history_table
+				%td
+					= version.user
+				%td
+					- if version.reverted?
+						%b="Reverted from"
+						%u="#{version.reverted_from}"
+					- else 
+						-version.modifications.each do |key, value|
+							%b="#{key.capitalize} from "
+							%u= "#{value.first} "
+							%b="to "
+							%u= "#{value.last}"
+							%br/
+				%td
+					= version.number
+				%td
+					= link_to "View", user_audit_path(:id => @user.id, :version => version.number )

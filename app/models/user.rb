@@ -2,6 +2,6 @@ class User < ActiveRecord::Base
   versioned :class_name => "UserVersion"
   
   def has_history?
-    self.versions != nil
+    !self.versions.blank?
   end
 end
