@@ -35,6 +35,11 @@
 				%td
 					= version.user
 				%td
-					= version.modifications
+					- version.modifications.each do |key, value|
+						%b="#{key.capitalize} from "
+						%u= "#{value.first} "
+						%b="to "
+						%u= "#{value.last}"
+						%br/
 				%td
 					= link_to "View", user_audit_path(:id => @user.id, :version => version.number )
