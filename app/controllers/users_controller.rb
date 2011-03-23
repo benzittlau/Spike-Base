@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     
     @user.revert_to(params[:version].to_i)
     
-    unless @user.reverted?
+    if @user.live?
       redirect_to @user
     end
     
