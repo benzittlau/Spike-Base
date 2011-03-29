@@ -16,16 +16,7 @@
 				%td
 					= version.user
 				%td
-					- if version.reverted?
-						%b="Reverted from"
-						%u="#{version.reverted_from}"
-					- else 
-						-version.modifications.each do |key, value|
-							%b="#{key.capitalize} from "
-							%u= "#{value.first} "
-							%b="to "
-							%u= "#{value.last}"
-							%br/
+					= action_helper(version)
 				%td
 					= version.number
 				%td

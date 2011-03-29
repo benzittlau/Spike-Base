@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110323034825) do
+ActiveRecord::Schema.define(:version => 20110323174952) do
 
   create_table "user_versions", :force => true do |t|
     t.integer  "versioned_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20110323034825) do
     t.text     "modifications"
     t.integer  "number"
     t.integer  "reverted_from"
+    t.string   "action"
     t.string   "tag"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20110323034825) do
     t.text     "modifications"
     t.integer  "number"
     t.integer  "reverted_from"
+    t.string   "action"
     t.string   "tag"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -63,5 +65,13 @@ ActiveRecord::Schema.define(:version => 20110323034825) do
   add_index "versions", ["user_id", "user_type"], :name => "index_versions_on_user_id_and_user_type"
   add_index "versions", ["user_name"], :name => "index_versions_on_user_name"
   add_index "versions", ["versioned_id", "versioned_type"], :name => "index_versions_on_versioned_id_and_versioned_type"
+
+  create_table "widgets", :force => true do |t|
+    t.string   "colour"
+    t.string   "shape"
+    t.string   "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

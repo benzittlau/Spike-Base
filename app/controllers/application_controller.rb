@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  def current_user
-    "Sagitarius Sam"
-  end
+  helper_method :current_user
+  
+  private
+    def current_user
+      "Sagitarius Sam"
+    end
 end

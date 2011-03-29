@@ -4,7 +4,7 @@ gem 'rails', '3.0.4'
 gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 gem 'haml-rails'
 gem 'jquery-rails', '>= 0.2.6'
-gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
+gem 'vestal_versions', :path => '~/sandbox/vestal_versions/'
 
 gem 'rails3-generators'
 

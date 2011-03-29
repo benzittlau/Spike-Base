@@ -3,7 +3,7 @@ Spike::Application.routes.draw do
 
   #this must come first or it will match for the resource show path
   match 'users/:id/audit/:version' => 'users#audit', :as => :user_audit
-  match 'users/:id/revert/:version' => 'user_versions#revert', :as => :user_revert
+  match 'users/:id/revert/:version' => 'users#revert', :as => :user_revert
   
   resources :users
   

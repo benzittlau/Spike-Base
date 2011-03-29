@@ -13,11 +13,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_id(params[:id]) || UserVersion.deleted(params[:id], User).restore
     
-    if @user.has_history?
-      @versions = @user.versions.reverse
-    end
+    @versions = @user.versions.scoped.reverse
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,7 +26,7 @@ class UsersController < ApplicationController
   def audit
     @user = User.find(params[:id])
     
-    if @user.has_history?
+    if @user.class.versioned?
       @versions = @user.versions.reverse
     end
     
@@ -40,6 +38,16 @@ class UsersController < ApplicationController
     
     revert_link = view_context.link_to("Revert to this version", user_revert_path(@user, :version => params[:version]))
     flash.now[:notice] = "You are viewing an old version of this object. #{revert_link}".html_safe
+  end
+  
+  def revert
+    @user = User.find(params[:id])
+    
+    #assign the versioning responsibility
+    @user.updated_by = current_user
+    
+    @user.revert_to!(params[:version].to_i)
+    redirect_to user_path(@user)
   end
 
   # GET /users/new
@@ -62,6 +70,9 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    
+    #assign the versioning responsibility
+    @user.updated_by = current_user
 
     respond_to do |format|
       if @user.save
@@ -79,8 +90,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     
-    #set the versioning responsibility
-    params[:user].merge!({:updated_by => current_user})
+    #assign the versioning responsibility
+    @user.updated_by = current_user
+    #params[:user].merge!({:updated_by => current_user})
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -97,6 +109,10 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     @user = User.find(params[:id])
+    
+    #assign the versioning responsibility
+    @user.updated_by = current_user
+    
     @user.destroy
 
     respond_to do |format|

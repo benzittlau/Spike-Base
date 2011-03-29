@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/adamcooper/vestal_versions
-  revision: 6273df533f85014062e346cb1807b0531a809ee2
+PATH
+  remote: ~/sandbox/vestal_versions/
   specs:
     vestal_versions (1.2.2)
       activerecord (>= 3.0.0)
