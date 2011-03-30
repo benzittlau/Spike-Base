@@ -10,6 +10,10 @@ module ApplicationHelper
       output += render :partial => "shared/version_actions", :locals => {:version => version}
     when :revert
       output += content_tag(:b, "Reverted to version ") + content_tag(:u, "#{version.reverted_from}")
+    when :destroy
+      output += content_tag(:b, "Deleted")
+    when :restore
+      output += content_tag(:b, "Restored")
     else
       output += "Unknown"
     end

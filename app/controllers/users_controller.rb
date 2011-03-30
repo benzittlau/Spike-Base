@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :get_user, :only => [:show, :audit]
   # GET /users
   # GET /users.xml
   def index
@@ -13,10 +14,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find_by_id(params[:id]) || UserVersion.deleted(params[:id], User).restore
-    
-    @versions = @user.versions.scoped.reverse
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -24,12 +21,6 @@ class UsersController < ApplicationController
   end
   
   def audit
-    @user = User.find(params[:id])
-    
-    if @user.class.versioned?
-      @versions = @user.versions.reverse
-    end
-    
     @user.revert_to(params[:version].to_i)
     
     if @user.live?
@@ -120,4 +111,12 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  private
+    def get_user
+      @user = User.find_by_id(params[:id]) || UserVersion.deleted(params[:id], User).restore
+      
+      @versions = @user.versions.scoped.reverse
+    end
 end

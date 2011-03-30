@@ -9,6 +9,7 @@ gem 'vestal_versions', :path => '~/sandbox/vestal_versions/'
 gem 'rails3-generators'
 
 group :development do
+	gem 'ruby-debug19'
 	gem 'rspec-rails'
 	#Trying to use the rails 3 generators instead
 	#gem 'nifty-generators'
